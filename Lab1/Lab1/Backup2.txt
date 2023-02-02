@@ -1,0 +1,85 @@
+//Создать класс, определяющий одномерный массив и содержащий функцию, 
+//осуществляющую поиск максимального элемента в этом массиве. 
+//Определить минимальный из максимальных элементов столбцов двумерной матрицы. 
+// 
+//Создать класс-наследник, дополнив его функцией сортировки массива по возрастанию количества делителей элементов. 
+//Определить число строк матрицы, упорядоченных по убыванию количества делителей.
+//
+//1. Создать класс и заполнить массив 
+//2. Поиск максимального элемента
+//3. Определить минимальный из максимальных элементов столбцов двумерной матрицы
+//  3.1 Создать массив и заполнить максимальными элементами столбцов
+//  3.2 Определить минимальное значение в этом массиве
+//4. Создать класс наследник
+//5. Добавить функцию сортировки массива по возрастанию кол-ва делителей элементов 
+//6. Подсчитать кол-во строк матрицы, упорядоченных по убыванию кол-ва делителей ("перевернуть сортировку")
+//7. Прописать исключительные ситуации
+//8. Подготовить тестовые данные
+
+#include <stdio.h>
+#include <stdlib.h>
+
+class arraySculptor {
+private:
+    char *arr;
+    int symbols;
+public:
+    arraySculptor(int n) //конструктор без параметров
+    {
+        symbols = n;
+        arr = new char[symbols];
+    }
+
+    arraySculptor(const arraySculptor& source) { //конструктор копирования
+        symbols = source.symbols;
+        arr = new char[symbols];
+        for (int i = 0; i < symbols; i++)
+            arr[i] = source.arr[i];
+    }
+
+    void sort() //сортировка массива по возрастанию
+    {
+        int temp; // переменные для хранения мин-ного значения и индекса массива
+        for (int i = 0; i < symbols; i++)
+        {
+            temp = arr[i]; //инициализируем врем. переменную
+            for (int j = i; j < symbols; j++)
+                if (temp > arr[j])//находим минимальный элемент
+                {
+                    temp = arr[j]; //делаем перестановку
+                    arr[j] = arr[i];
+                    arr[i] = temp;
+                }
+        }
+    }
+
+    void print() {
+        printf("Your array: ");
+        for (int i = 0; i < symbols; i++)
+            printf("%c", arr[i]);
+        printf("\n");
+    }
+
+    char MAX(arraySculptor array) {
+        arraySculptor tempArray(array);
+        tempArray.sort();
+        return tempArray.arr[symbols - 1];
+    }
+
+    /*char MIN(arraySculptor array) {
+        arraySculptor tempArray(array);
+        tempArray.sort();
+        return tempArray.arr[0];
+    }*/
+};
+
+int main()
+{
+    arraySculptor array(50);
+    array.print();
+    printf("Max value is: %c\n", array.MAX(array));
+    array.print();
+
+    system("pause");
+    return 0;
+}

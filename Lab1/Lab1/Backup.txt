@@ -1,0 +1,111 @@
+//Создать класс, определяющий одномерный массив и содержащий функцию, 
+//осуществляющую поиск максимального элемента в этом массиве. 
+//Определить минимальный из максимальных элементов столбцов двумерной матрицы. 
+// 
+//Создать класс-наследник, дополнив его функцией сортировки массива по возрастанию количества делителей элементов. 
+//Определить число строк матрицы, упорядоченных по убыванию количества делителей.
+//
+//1. Создать класс и заполнить массив 
+//2. Поиск максимального элемента
+//3. Определить минимальный из максимальных элементов столбцов двумерной матрицы
+//  3.1 Создать массив и заполнить максимальными элементами столбцов
+//  3.2 Определить минимальное значение в этом массиве
+//4. Создать класс наследник
+//5. Добавить функцию сортировки массива по возрастанию кол-ва делителей элементов 
+//6. Подсчитать кол-во строк матрицы, упорядоченных по убыванию кол-ва делителей ("перевернуть сортировку")
+//7. Прописать исключительные ситуации
+//8. Подготовить тестовые данные
+
+#include <stdio.h>
+#include <stdlib.h>
+
+class arraySculptor {
+private:
+    char* arr;
+    int size;
+    int symbols;
+
+    void sort() {
+        char temp; // переменные для хранения мин-ного значения и индекса массива
+        for (int i = 0; i < symbols; i++)
+        {
+            temp = arr[i];
+            for (int j = i; j < symbols; j++)
+                if (temp > arr[j])//находим минимальный элемент
+                {
+                    temp = arr[j]; //делаем перестановку
+                    arr[j] = arr[i];
+                    arr[i] = temp;
+                }
+        }
+    }
+public:
+    arraySculptor() {
+        int i = 0;
+        size = 5, symbols = 0;
+        arr = (char*)malloc(size * sizeof(char));
+
+        printf("Enter your array (it must be only numbers):\n\n");
+        while (i <= size) {
+
+            if (arr == NULL) { printf("Can't allocate memory\n"); exit(1); }
+
+            arr[i] = getchar();
+            if (arr[i] == '\n') break;
+
+            symbols++;
+
+            if (i < size) {
+                size += 1;
+                arr = (char*)realloc(arr, size);
+
+                if (arr == NULL) { printf("Can't allocate memory\n"); exit(1); }
+            }
+            i++;
+        }
+        
+        arr = (char*)realloc(arr, size+1);
+        arr[i + 1] = '\0';
+        size = symbols + 1;
+        printf("\n");
+    }
+
+    arraySculptor(const arraySculptor& source) { //конструктор копирования
+        size = source.size;
+        symbols = source.symbols;
+        arr = new char[size];
+        for (int i = 0; i < size; i++)
+            arr[i] = source.arr[i];
+    }
+
+    void print() {
+        printf("Your array: ");
+        for (int i = 0; i < symbols; i++)
+            printf("%c", arr[i]);
+        printf("\n");
+    }
+
+    char max(arraySculptor array) {
+        arraySculptor tempArray(array);
+        tempArray.sort();
+        return tempArray.arr[symbols - 1];
+    }
+
+    char min(arraySculptor array) {
+        arraySculptor tempArray(array);
+        tempArray.sort();
+        return tempArray.arr[0];
+    }
+};
+
+int main()
+{
+    arraySculptor array;
+    array.print();
+    printf("Max value is: %c\n", array.max(array));
+    printf("Min value is: %c\n", array.min(array));
+    array.print();
+
+    system("pause");
+    return 0;
+}

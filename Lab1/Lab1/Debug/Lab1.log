@@ -1,0 +1,7 @@
+﻿  Lab1.cpp
+D:\Documents\Станкин\Учёба\2 Курс\Программирование на языке высокого уровня\Лабораторные работы\Lab1\Lab1\Lab1.cpp(131,41): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Documents\Станкин\Учёба\2 Курс\Программирование на языке высокого уровня\Лабораторные работы\Lab1\Lab1\Lab1.cpp(131,66): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Documents\Станкин\Учёба\2 Курс\Программирование на языке высокого уровня\Лабораторные работы\Lab1\Lab1\Lab1.cpp(150,29): warning C4244: '=': conversion from 'float' to 'char', possible loss of data
+D:\Documents\Станкин\Учёба\2 Курс\Программирование на языке высокого уровня\Лабораторные работы\Lab1\Lab1\Lab1.cpp(179,43): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\Documents\Станкин\Учёба\2 Курс\Программирование на языке высокого уровня\Лабораторные работы\Lab1\Lab1\Lab1.cpp(179,79): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  Lab1.vcxproj -> D:\Documents\Станкин\Учёба\2 Курс\Программирование на языке высокого уровня\Лабораторные работы\Lab1\Debug\Lab1.exe
